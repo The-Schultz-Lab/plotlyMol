@@ -1,7 +1,6 @@
 name: plotlymol
 channels:
   - conda-forge
-  - defaults
 dependencies:
   # Python - version not pinned here; let CI matrix or user choose
   - python>=3.9
@@ -10,7 +9,6 @@ dependencies:
   - rdkit>=2022.3.1
   - plotly>=5.0.0
   - numpy>=1.20.0
-  - kaleido>=0.2.1
 
   # GUI
   - streamlit>=1.30.0
@@ -29,13 +27,13 @@ dependencies:
   # Security scanning
   - pip-audit>=2.6.0
 
-  # Documentation
+  # Documentation (conda-forge)
   - mkdocs>=1.5.0
   - mkdocs-material>=9.5.0
-  - mkdocstrings>=0.24.0
 
-  # pip-only packages (not on conda-forge or version constraints)
+  # pip-only packages
   - pip
   - pip:
+    - kaleido>=0.2.1
     - mkdocstrings[python]>=0.24.0
     - mkdocs-jupyter>=0.24.0
