@@ -42,9 +42,9 @@ jobs:
           path: pip-audit-report.md
           retention-days: 30
 
-      - name: Fail on high-severity vulnerabilities
-        # Re-run without --output to get exit code; || true above was only for artifact capture
-        run: pip-audit --strict
+      - name: Fail on known vulnerabilities
+        # --strict would also fail on conda packages not found on PyPI (e.g. rdkit); omit it
+        run: pip-audit
 
   codeql:
     name: CodeQL Static Analysis

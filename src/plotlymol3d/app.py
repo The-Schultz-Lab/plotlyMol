@@ -112,8 +112,8 @@ def get_cached_vibration_animation(
     Returns:
         Animated Plotly figure
     """
-    import pickle
     import hashlib
+    import pickle
 
     # Create cache key from parameters
     cache_key_data = (
@@ -932,13 +932,15 @@ def main():
         st.info("Enter a molecule above to visualize it")
 
     st.sidebar.markdown("---")
-    st.sidebar.markdown("""
+    st.sidebar.markdown(
+        """
     **Quick Examples:**
     - `CCO` - Ethanol
     - `c1ccccc1` - Benzene
     - `CC(=O)O` - Acetic acid
     - `CN1C=NC2=C1C(=O)N(C(=O)N2C)C` - Caffeine
-    """)
+    """
+    )
 
     st.sidebar.markdown("---")
     st.sidebar.caption(

@@ -1079,7 +1079,7 @@ def add_vibrations_to_figure(
     if display_type in ("arrows", "both"):
         fig.update_layout(
             scene_aspectmode="cube",
-            scene_aspectratio=dict(x=1, y=1, z=1),
+            scene_aspectratio={"x": 1, "y": 1, "z": 1},
         )
 
     return fig
