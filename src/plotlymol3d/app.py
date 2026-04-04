@@ -764,7 +764,12 @@ def main():
                             # Display type selection
                             vib_display_type = st.selectbox(
                                 "Display Type",
-                                ["Static arrows", "Animation", "Heatmap", "Arrows + Heatmap"],
+                                [
+                                    "Static arrows",
+                                    "Animation",
+                                    "Heatmap",
+                                    "Arrows + Heatmap",
+                                ],
                                 index=0,
                                 help="How to visualize the vibrational mode",
                             )
