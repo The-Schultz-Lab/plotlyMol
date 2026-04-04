@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main, develop]
 
+defaults:
+  run:
+    shell: bash -el {0}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -13,24 +17,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up conda environment
+        uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: "3.11"
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install ruff black
+          environment-file: environment.yml
+          activate-environment: plotlymol
+          auto-activate-base: false
+          miniforge-version: latest
+          conda-solver: libmamba
 
       - name: Check formatting with Black
-        run: |
-          black --check --diff src/plotlymol3d tests
+        run: black --check --diff src/plotlymol3d tests
 
       - name: Lint with Ruff
-        run: |
-          ruff check src/plotlymol3d tests
+        run: ruff check src/plotlymol3d tests
 
   type-check:
     runs-on: ubuntu-latest
@@ -38,18 +39,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up conda environment
+        uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: "3.11"
-          cache: 'pip'
+          environment-file: environment.yml
+          activate-environment: plotlymol
+          auto-activate-base: false
+          miniforge-version: latest
+          conda-solver: libmamba
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -e .
+      - name: Install package in editable mode
+        run: pip install -e .
 
       - name: Type check with mypy
-        run: |
-          mypy src/plotlymol3d --ignore-missing-imports
+        run: mypy src/plotlymol3d --ignore-missing-imports

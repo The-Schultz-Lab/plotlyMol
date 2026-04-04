@@ -1,0 +1,86 @@
+name: Security
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run weekly on Monday at 08:00 UTC to catch newly disclosed CVEs
+    - cron: "0 8 * * 1"
+
+defaults:
+  run:
+    shell: bash -el {0}
+
+jobs:
+  dependency-audit:
+    name: Dependency Audit (pip-audit)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up conda environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: "3.11"
+          environment-file: environment.yml
+          activate-environment: plotlymol
+          auto-activate-base: false
+          miniforge-version: latest
+          conda-solver: libmamba
+
+      - name: Install package in editable mode
+        run: pip install -e .
+
+      - name: Audit dependencies for known CVEs
+        run: pip-audit --format=markdown --output=pip-audit-report.md || true
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pip-audit-report
+          path: pip-audit-report.md
+          retention-days: 30
+
+      - name: Fail on high-severity vulnerabilities
+        # Re-run without --output to get exit code; || true above was only for artifact capture
+        run: pip-audit --strict
+
+  codeql:
+    name: CodeQL Static Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+          # Detects: injection, path-traversal, XSS, unsafe deserialization, etc.
+          queries: security-and-quality
+
+      - name: Set up conda environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: "3.11"
+          environment-file: environment.yml
+          activate-environment: plotlymol
+          auto-activate-base: false
+          miniforge-version: latest
+          conda-solver: libmamba
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:python"
