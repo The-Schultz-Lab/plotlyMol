@@ -29,7 +29,7 @@ classifiers = [
 dependencies = [
     "plotly>=5.0.0",
     "numpy>=1.20.0",
-    "rdkit>=2022.3.1",
+    "rdkit>=2026.3.1",
     "kaleido>=0.2.1",
 ]
 
