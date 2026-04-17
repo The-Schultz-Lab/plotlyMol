@@ -373,7 +373,7 @@ python examples/demo_visualizations.py
 
 ## Download Examples
 
-All example code is available in the [GitHub repository](https://github.com/NCCU-Schultz-Lab/plotlyMol/tree/main/examples).
+All example code is available in the [GitHub repository](https://github.com/The-Schultz-Lab/plotlyMol/tree/main/examples).
 
 ## Contributing Examples
 

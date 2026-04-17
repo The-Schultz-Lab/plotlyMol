@@ -6,7 +6,7 @@ Thank you for your interest in contributing to plotlyMol! This guide will help y
 
 ###  Report Bugs
 
-Found a bug? Please [open an issue](https://github.com/NCCU-Schultz-Lab/plotlyMol/issues/new) with:
+Found a bug? Please [open an issue](https://github.com/The-Schultz-Lab/plotlyMol/issues/new) with:
 
 - Clear description of the problem
 - Steps to reproduce
@@ -16,7 +16,7 @@ Found a bug? Please [open an issue](https://github.com/NCCU-Schultz-Lab/plotlyMo
 
 ###  Suggest Features
 
-Have an idea? We'd love to hear it! [Open an issue](https://github.com/NCCU-Schultz-Lab/plotlyMol/issues/new) describing:
+Have an idea? We'd love to hear it! [Open an issue](https://github.com/The-Schultz-Lab/plotlyMol/issues/new) describing:
 
 - The feature and its use case
 - Why it would be valuable
@@ -45,7 +45,7 @@ git clone https://github.com/YOUR_USERNAME/plotlyMol.git
 cd plotlyMol
 
 # Add upstream remote
-git remote add upstream https://github.com/NCCU-Schultz-Lab/plotlyMol.git
+git remote add upstream https://github.com/The-Schultz-Lab/plotlyMol.git
 ```
 
 ### 2. Create Virtual Environment
@@ -411,8 +411,8 @@ Contributors are recognized in:
 
 Have questions about contributing?
 
-- Open a [Discussion](https://github.com/NCCU-Schultz-Lab/plotlyMol/discussions)
+- Open a [Discussion](https://github.com/The-Schultz-Lab/plotlyMol/discussions)
 - Check existing documentation
 - Reach out to maintainers
 
-Thank you for contributing to plotlyMol! 
+Thank you for contributing to plotlyMol!

@@ -10,7 +10,7 @@ Currently, plotlyMol is best installed from source:
 
 ```bash
 # Clone the repository
-git clone https://github.com/NCCU-Schultz-Lab/plotlyMol.git
+git clone https://github.com/The-Schultz-Lab/plotlyMol.git
 cd plotlyMol
 
 # Create a virtual environment (recommended)

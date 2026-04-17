@@ -192,7 +192,7 @@ Thanks to the developers of:
 
 ## License
 
-plotlyMol is released under the [MIT License](https://github.com/NCCU-Schultz-Lab/plotlyMol/blob/main/LICENSE).
+plotlyMol is released under the [MIT License](https://github.com/The-Schultz-Lab/plotlyMol/blob/main/LICENSE).
 
 ```
 MIT License
@@ -212,8 +212,8 @@ copies or substantial portions of the Software.
 
 ## Contact
 
-- **GitHub Issues**: [Report issues or request features](https://github.com/NCCU-Schultz-Lab/plotlyMol/issues)
-- **GitHub Discussions**: [Ask questions or share ideas](https://github.com/NCCU-Schultz-Lab/plotlyMol/discussions)
+- **GitHub Issues**: [Report issues or request features](https://github.com/The-Schultz-Lab/plotlyMol/issues)
+- **GitHub Discussions**: [Ask questions or share ideas](https://github.com/The-Schultz-Lab/plotlyMol/discussions)
 - **Email**: jonathanschultzNU@users.noreply.github.com
 
 ## Citation
@@ -225,7 +225,7 @@ If you use plotlyMol in your research, please cite:
   title = {plotlyMol: Interactive 3D Molecular Visualizations},
   author = {Schultz, Jonathan and Lear, Benjamin},
   year = {2026},
-  url = {https://github.com/NCCU-Schultz-Lab/plotlyMol},
+  url = {https://github.com/The-Schultz-Lab/plotlyMol},
   note = {Version 0.1.0}
 }
 ```

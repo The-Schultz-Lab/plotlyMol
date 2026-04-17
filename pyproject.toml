@@ -49,10 +49,10 @@ gui = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/NCCU-Schultz-Lab/plotlyMol"
-Repository = "https://github.com/NCCU-Schultz-Lab/plotlyMol"
-Issues = "https://github.com/NCCU-Schultz-Lab/plotlyMol/issues"
-Documentation = "https://nccu-schultz-lab.github.io/plotlyMol"
+Homepage = "https://github.com/The-Schultz-Lab/plotlyMol"
+Repository = "https://github.com/The-Schultz-Lab/plotlyMol"
+Issues = "https://github.com/The-Schultz-Lab/plotlyMol/issues"
+Documentation = "https://the-schultz-lab.github.io/plotlyMol"
 
 [tool.setuptools]
 packages = ["plotlymol3d"]

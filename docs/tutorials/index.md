@@ -115,8 +115,8 @@ See the [Examples](../examples/index.md) page for a gallery of molecular visuali
 
 - Check the [API Reference](../api/index.md)
 - Read the [User Guide](../user-guide/basic-usage.md)
-- Ask in [GitHub Discussions](https://github.com/NCCU-Schultz-Lab/plotlyMol/discussions)
-- Report issues on [GitHub](https://github.com/NCCU-Schultz-Lab/plotlyMol/issues)
+- Ask in [GitHub Discussions](https://github.com/The-Schultz-Lab/plotlyMol/discussions)
+- Report issues on [GitHub](https://github.com/The-Schultz-Lab/plotlyMol/issues)
 
 ## Contributing Tutorials
 
@@ -131,4 +131,4 @@ See the [Contributing Guide](../contributing.md) for details on how to:
 
 ---
 
-**Note**: This tutorials section is actively being developed. Check the [GitHub repository](https://github.com/NCCU-Schultz-Lab/plotlyMol) for the latest additions.
+**Note**: This tutorials section is actively being developed. Check the [GitHub repository](https://github.com/The-Schultz-Lab/plotlyMol) for the latest additions.

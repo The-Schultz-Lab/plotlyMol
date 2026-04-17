@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated README installation instructions for conda workflow
 - Expanded test suite from 26 to 47 tests
 - Bumped `requires-python` from `>=3.8` to `>=3.9`
-- Fixed repo URLs in `pyproject.toml` (now correctly point to NCCU-Schultz-Lab org)
+- Fixed repo URLs in `pyproject.toml` (now correctly point to The-Schultz-Lab org)
 
 ## [0.1.0] - 2026-01-31
 

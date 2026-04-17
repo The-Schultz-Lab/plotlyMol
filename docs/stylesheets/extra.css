@@ -1,0 +1,25 @@
+.hero-title {
+  text-align: center;
+  padding: 2.5rem 0 0.25rem;
+}
+
+.hero-title h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  opacity: 0.65;
+  margin: 0;
+  text-transform: uppercase;
+}

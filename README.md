@@ -4,8 +4,8 @@
   <img src="logo.svg" alt="plotlyMol Logo" width="300"/>
 </p>
 
-[![Tests](https://github.com/NCCU-Schultz-Lab/plotlyMol/actions/workflows/test.yml/badge.svg)](https://github.com/NCCU-Schultz-Lab/plotlyMol/actions/workflows/test.yml)
-[![Lint](https://github.com/NCCU-Schultz-Lab/plotlyMol/actions/workflows/lint.yml/badge.svg)](https://github.com/NCCU-Schultz-Lab/plotlyMol/actions/workflows/lint.yml)
+[![Tests](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/test.yml/badge.svg)](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/test.yml)
+[![Lint](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/lint.yml/badge.svg)](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/lint.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Interactive molecular visualizations with Plotly. Supports SMILES, XYZ, MOL/PDB, and cube orbitals.
@@ -27,7 +27,7 @@ Interactive molecular visualizations with Plotly. Supports SMILES, XYZ, MOL/PDB,
 ### From source (recommended for now)
 
 ```bash
-git clone https://github.com/NCCU-Schultz-Lab/plotlyMol.git
+git clone https://github.com/The-Schultz-Lab/plotlyMol.git
 cd plotlyMol
 
 # Create and activate the conda environment (includes all dependencies)
@@ -242,4 +242,3 @@ plotlyMol/
 ## Roadmap
 
 See the current roadmap in [docs/ROADMAP.md](docs/ROADMAP.md).
-
