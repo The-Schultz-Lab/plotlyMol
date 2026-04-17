@@ -1,5 +1,8 @@
 from .atomProperties import *  # noqa: F403
 from .plotlyMol3D import *  # noqa: F403
+from .plotlyMol3D import (
+    create_trajectory_animation as create_trajectory_animation,
+)
 from .vibrations import (
     VibrationalData as VibrationalData,
 )

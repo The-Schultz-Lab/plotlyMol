@@ -190,3 +190,85 @@ class TestDrawFunctions:
 
         # Each bond creates 2 traces (one per half)
         assert len(fig.data) == initial_traces + 2 * len(bondList)
+
+
+# ---------------------------------------------------------------------------
+# create_trajectory_animation
+# ---------------------------------------------------------------------------
+
+
+def _water_xyzblocks(n: int = 3) -> list:
+    """Return n slightly perturbed XYZ blocks for water."""
+    blocks = []
+    for i in range(n):
+        o_z = i * 0.01
+        block = (
+            f"3\nH2O step {i}\n"
+            f"O  0.0   0.0   {o_z:.4f}\n"
+            f"H  0.757 0.587 0.0\n"
+            f"H -0.757 0.587 0.0"
+        )
+        blocks.append(block)
+    return blocks
+
+
+class TestCreateTrajectoryAnimation:
+    """Tests for create_trajectory_animation in plotlyMol3D."""
+
+    def test_returns_plotly_figure(self):
+        """Returns a Plotly Figure object."""
+        from plotlymol3d import create_trajectory_animation
+
+        fig = create_trajectory_animation(_water_xyzblocks(3))
+        assert isinstance(fig, Figure)
+
+    def test_frame_count_matches_input(self):
+        """Number of frames equals number of XYZ blocks."""
+        from plotlymol3d import create_trajectory_animation
+
+        blocks = _water_xyzblocks(4)
+        fig = create_trajectory_animation(blocks)
+        assert len(fig.frames) == 4
+
+    def test_minimum_two_frames_accepted(self):
+        """Two frames is the valid minimum."""
+        from plotlymol3d import create_trajectory_animation
+
+        fig = create_trajectory_animation(_water_xyzblocks(2))
+        assert len(fig.frames) == 2
+
+    def test_single_frame_raises_value_error(self):
+        """Providing only one frame raises ValueError."""
+        from plotlymol3d import create_trajectory_animation
+
+        with pytest.raises(ValueError):
+            create_trajectory_animation(_water_xyzblocks(1))
+
+    def test_slider_step_count(self):
+        """Slider has one step per frame."""
+        from plotlymol3d import create_trajectory_animation
+
+        n = 5
+        fig = create_trajectory_animation(_water_xyzblocks(n))
+        assert len(fig.layout.sliders) > 0
+        assert len(fig.layout.sliders[0].steps) == n
+
+    def test_initial_traces_not_empty(self):
+        """Initial figure data contains at least one trace."""
+        from plotlymol3d import create_trajectory_animation
+
+        fig = create_trajectory_animation(_water_xyzblocks(2))
+        assert len(fig.data) > 0
+
+    def test_energies_in_frame_labels(self):
+        """Energy values appear in frame layout titles."""
+        from plotlymol3d import create_trajectory_animation
+
+        energies = [-75.0, -75.3, -75.6]
+        fig = create_trajectory_animation(
+            _water_xyzblocks(3), energies_hartree=energies
+        )
+        titles = [
+            f.layout.title.text for f in fig.frames if f.layout and f.layout.title
+        ]
+        assert any("-75" in (t or "") for t in titles)

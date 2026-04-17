@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """
-Streamlit GUI for plotlyMol3D - Visual Testing & Demo App.
+Dash GUI for plotlyMol3D - Interactive 3D Molecular Viewer.
 
 Run with:
-    streamlit run examples/gui_app.py
+    python examples/gui_app.py
 
 Requirements:
-    pip install streamlit
+    pip install plotlymol3d[gui]
 """
-from pathlib import Path
+
 import sys
+from pathlib import Path
 
 try:
     from plotlymol3d.app import main

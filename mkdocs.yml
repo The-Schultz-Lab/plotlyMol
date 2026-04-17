@@ -1,10 +1,10 @@
 site_name: plotlyMol Documentation
 site_description: Interactive 3D molecular visualizations with Plotly
 site_author: Jonathan Schultz & Benjamin Lear
-site_url: https://nccu-schultz-lab.github.io/plotlyMol
+site_url: https://the-schultz-lab.github.io/plotlyMol
 
-repo_name: NCCU-Schultz-Lab/plotlyMol
-repo_url: https://github.com/NCCU-Schultz-Lab/plotlyMol
+repo_name: The-Schultz-Lab/plotlyMol
+repo_url: https://github.com/The-Schultz-Lab/plotlyMol
 edit_uri: edit/main/docs/
 
 theme:
@@ -46,11 +46,9 @@ extra_css:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/NCCU-Schultz-Lab/plotlyMol
+      link: https://github.com/The-Schultz-Lab/plotlyMol
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/plotlymol/
-  version:
-    provider: mike
 
 plugins:
   - search:

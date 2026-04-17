@@ -206,23 +206,25 @@ fig.show()
 
 ## Using the GUI
 
-Launch the interactive Streamlit app:
+<video autoplay loop muted playsinline style="width:100%;border-radius:8px;margin-bottom:1rem">
+  <source src="../assets/dash-example.webm" type="video/webm">
+</video>
+
+Launch the interactive Dash app:
 
 ```bash
-streamlit run examples/gui_app.py
+python examples/gui_app.py
 ```
 
-Or on Windows, use the provided scripts:
-```bash
-launch_app.bat  # Launch GUI
-stop_app.bat    # Stop GUI
-```
+Or on Windows, double-click `launch_app.bat`.
 
 The GUI provides:
-- Input via SMILES, file upload, or random molecules
-- Real-time parameter adjustment
-- Orbital visualization controls
-- Export options
+
+- Molecule search by name via PubChem
+- Input via SMILES string or built-in sample library
+- Visualization mode selection (ball+stick, stick, VDW)
+- Lighting presets
+- Formula and atom/bond count display
 
 ## Complete Example
 

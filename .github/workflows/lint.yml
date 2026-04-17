@@ -52,5 +52,8 @@ jobs:
       - name: Install package in editable mode
         run: pip install -e .
 
+      - name: Install mypy stubs
+        run: pip install types-requests
+
       - name: Type check with mypy
-        run: mypy src/plotlymol3d --ignore-missing-imports
+        run: mypy src/plotlymol3d --ignore-missing-imports --disable-error-code=import-untyped

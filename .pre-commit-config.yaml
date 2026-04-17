@@ -11,6 +11,7 @@ repos:
       - id: check-yaml
         args: [--unsafe]
       - id: check-added-large-files
+        exclude: ^docs/assets/
       - id: check-merge-conflict
       - id: debug-statements
 
@@ -30,6 +31,6 @@ repos:
     rev: v1.8.0
     hooks:
       - id: mypy
-        additional_dependencies: [numpy, plotly]
+        additional_dependencies: [numpy, plotly, types-requests]
         args: [--ignore-missing-imports]
         exclude: ^(src/plotlymol3d/test\.py|src/plotlymol3d/Cube_to_Blender.*)$

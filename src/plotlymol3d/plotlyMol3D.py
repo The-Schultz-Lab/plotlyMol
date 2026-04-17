@@ -456,6 +456,7 @@ def make_bond_mesh_trace(
     radius: float = DEFAULT_RADIUS,
     resolution: int = DEFAULT_RESOLUTION,
     color: str = "grey",
+    add_caps: bool = True,
 ) -> go.Mesh3d:
     """Create a Plotly Mesh3d trace for a bond (cylinder).
 
@@ -469,24 +470,42 @@ def make_bond_mesh_trace(
     Returns:
         Plotly Mesh3d trace object for the bond segment.
     """
-    x, y, z = generate_cylinder_mesh_rectangles(point1, point2, radius, resolution)
+    p1 = np.array(point1)
+    p2 = np.array(point2)
+    x, y, z = generate_cylinder_mesh_rectangles(p1, p2, radius, resolution)
 
-    # Create the faces for the cylinder using rectangles
-    i, j, k, l = [], [], [], []
-    num_vertices = resolution
-    for n in range(num_vertices):
-        next_n = (n + 1) % num_vertices
-        i.extend([n, next_n, next_n, n])
-        j.extend([n, n, n + num_vertices, n + num_vertices])
-        k.extend(
-            [
-                n + num_vertices,
-                n + num_vertices,
-                next_n + num_vertices,
-                next_n + num_vertices,
-            ]
-        )
-        l.extend([next_n, next_n + num_vertices, next_n + num_vertices, next_n])
+    # Append center points for the two end-cap disks
+    x = np.append(x, [p1[0], p2[0]])
+    y = np.append(y, [p1[1], p2[1]])
+    z = np.append(z, [p1[2], p2[2]])
+
+    res = resolution
+    c_bottom = 2 * res  # center of bottom cap (at p1)
+    c_top = 2 * res + 1  # center of top cap (at p2)
+
+    i, j, k = [], [], []
+
+    # Side wall: two triangles per quad segment
+    for n in range(res):
+        nxt = (n + 1) % res
+        i.extend([n, n])
+        j.extend([n + res, nxt + res])
+        k.extend([nxt + res, nxt])
+
+    if add_caps:
+        # Bottom cap (fan from c_bottom into bottom-circle rim)
+        for n in range(res):
+            nxt = (n + 1) % res
+            i.append(c_bottom)
+            j.append(nxt)
+            k.append(n)
+
+        # Top cap (fan from c_top into top-circle rim)
+        for n in range(res):
+            nxt = (n + 1) % res
+            i.append(c_top)
+            j.append(n + res)
+            k.append(nxt + res)
 
     bond_trace = go.Mesh3d(
         x=x,
@@ -500,6 +519,45 @@ def make_bond_mesh_trace(
         hoverinfo="skip",
     )
     return bond_trace
+
+
+def _make_oval_cap(
+    center: np.ndarray,
+    bond_dir: np.ndarray,
+    perp_major: np.ndarray,
+    semi_a: float,
+    semi_b: float,
+    resolution: int,
+    color: str,
+) -> go.Mesh3d:
+    """Flat elliptical end cap for multi-bond termini."""
+    perp_minor = np.cross(bond_dir, perp_major)
+    norm = np.linalg.norm(perp_minor)
+    if norm > 0:
+        perp_minor /= norm
+
+    theta = np.linspace(0, 2 * np.pi, resolution, endpoint=False)
+    rim = (
+        center[:, None]
+        + semi_a * perp_major[:, None] * np.cos(theta)
+        + semi_b * perp_minor[:, None] * np.sin(theta)
+    )
+
+    x = np.append(rim[0], center[0])
+    y = np.append(rim[1], center[1])
+    z = np.append(rim[2], center[2])
+
+    c_idx = resolution
+    i, j, k = [], [], []
+    for n in range(resolution):
+        nxt = (n + 1) % resolution
+        i.append(c_idx)
+        j.append(n)
+        k.append(nxt)
+
+    return go.Mesh3d(
+        x=x, y=y, z=z, i=i, j=j, k=k, color=color, opacity=1, hoverinfo="skip"
+    )
 
 
 def draw_bonds(
@@ -679,6 +737,7 @@ def draw_bonds(
                     fig.add_trace(bond_trace)
             else:
                 # Solid bond: single cylinder per half
+                use_oval_caps = bond_order in (2.0, 3.0)
                 # First half of bond (atom 1 color)
                 bond_trace = make_bond_mesh_trace(
                     p1.tolist(),
@@ -686,6 +745,7 @@ def draw_bonds(
                     color=atom_colors[bond.a1_number],
                     resolution=resolution,
                     radius=r,
+                    add_caps=not use_oval_caps,
                 )
                 fig.add_trace(bond_trace)
 
@@ -696,8 +756,29 @@ def draw_bonds(
                     color=atom_colors[bond.a2_number],
                     resolution=resolution,
                     radius=r,
+                    add_caps=not use_oval_caps,
                 )
                 fig.add_trace(bond_trace)
+
+        # Oval end caps for double and triple bonds
+        if bond_order in (2.0, 3.0):
+            bond_dir = bond_vec / np.linalg.norm(bond_vec)
+            max_offset = max(np.linalg.norm(o) for o in offsets)
+            r0 = radii[0]
+            semi_a = max_offset + r0
+            semi_b = r0
+            for center, color_num in [(a1, bond.a1_number), (a2, bond.a2_number)]:
+                fig.add_trace(
+                    _make_oval_cap(
+                        center,
+                        bond_dir,
+                        perp,
+                        semi_a,
+                        semi_b,
+                        resolution,
+                        atom_colors[color_num],
+                    )
+                )
 
     return fig
 
@@ -823,6 +904,174 @@ def draw_3D_mol(
         fig = draw_bonds(fig, bondList, atomList, resolution=resolution, radius=radius)
     elif "vdw" == mode:
         fig = draw_atoms(fig, atomList, resolution=resolution * 4, radius="vdw")
+
+    return fig
+
+
+def create_trajectory_animation(
+    xyzblocks: List[str],
+    energies_hartree: Optional[List[float]] = None,
+    charge: int = 0,
+    mode: str = "ball+stick",
+    resolution: int = 16,
+    title: str = "Geometry Optimization Trajectory",
+) -> go.Figure:
+    """Create an animated Plotly figure stepping through geometry optimization frames.
+
+    Each XYZ block is one step in a BFGS or similar optimization trajectory.
+    The first frame is the starting geometry; the last is the optimized structure.
+
+    Args:
+        xyzblocks: List of XYZ-format strings (count line + title line + coord lines).
+            Must contain at least 2 entries.
+        energies_hartree: SCF energy in Hartrees for each frame (same length as
+            xyzblocks). Used to annotate frame labels. Optional.
+        charge: Molecular charge for bond-order perception.
+        mode: Visualization mode - "ball+stick", "stick", or "vdw".
+        resolution: Sphere/cylinder mesh resolution (lower = faster).
+        title: Figure title.
+
+    Returns:
+        Plotly Figure with animation frames and play/step controls.
+
+    Raises:
+        ValueError: If fewer than 2 xyzblocks are provided.
+
+    Example:
+        >>> blocks = [xyz_block_1, xyz_block_2, xyz_block_3]
+        >>> energies = [-75.0, -75.5, -75.6]
+        >>> fig = create_trajectory_animation(blocks, energies)
+        >>> fig.show()
+    """
+    if len(xyzblocks) < 2:
+        raise ValueError(
+            f"create_trajectory_animation requires at least 2 frames, "
+            f"got {len(xyzblocks)}"
+        )
+
+    n_frames = len(xyzblocks)
+
+    # Parse the reference mol (first frame) for bond connectivity.
+    ref_mol = xyzblock_to_rdkitmol(xyzblocks[0], charge=charge)
+
+    frames = []
+    first_frame_data = None
+
+    for i, xyzblock in enumerate(xyzblocks):
+        # Update atom positions from this frame's XYZ block.
+        raw = Chem.MolFromXYZBlock(xyzblock)
+        frame_mol = Chem.RWMol(ref_mol)
+        conf = frame_mol.GetConformer()
+        raw_conf = raw.GetConformer()
+        for atom_idx in range(frame_mol.GetNumAtoms()):
+            pos = raw_conf.GetAtomPosition(atom_idx)
+            conf.SetAtomPosition(atom_idx, (pos.x, pos.y, pos.z))
+
+        # Build traces for this frame.
+        empty_fig = go.Figure()
+        fig_frame = draw_3D_mol(
+            empty_fig, frame_mol.GetMol(), mode=mode, resolution=resolution
+        )
+        frame_traces = list(fig_frame.data)
+
+        # Build frame label.
+        if energies_hartree is not None and i < len(energies_hartree):
+            e_label = f"Step {i}: E = {energies_hartree[i]:.6f} Hₐ"
+        else:
+            e_label = f"Step {i}"
+
+        frames.append(
+            go.Frame(
+                data=frame_traces,
+                name=f"frame_{i}",
+                layout=go.Layout(title_text=f"{title} — {e_label}"),
+            )
+        )
+        if i == 0:
+            first_frame_data = frame_traces
+
+    fig = go.Figure(data=first_frame_data, frames=frames)
+
+    # Animation controls: play/pause button + step slider.
+    fig.update_layout(
+        title=title,
+        updatemenus=[
+            {
+                "type": "buttons",
+                "showactive": False,
+                "buttons": [
+                    {
+                        "label": "▶ Play",
+                        "method": "animate",
+                        "args": [
+                            None,
+                            {
+                                "frame": {"duration": 300, "redraw": True},
+                                "fromcurrent": False,
+                                "mode": "immediate",
+                                "transition": {"duration": 0},
+                            },
+                        ],
+                    },
+                    {
+                        "label": "⏸ Pause",
+                        "method": "animate",
+                        "args": [
+                            [None],
+                            {
+                                "frame": {"duration": 0, "redraw": False},
+                                "mode": "immediate",
+                                "transition": {"duration": 0},
+                            },
+                        ],
+                    },
+                ],
+                "x": 0.1,
+                "y": 0.0,
+                "xanchor": "left",
+                "yanchor": "bottom",
+            }
+        ],
+        sliders=[
+            {
+                "active": 0,
+                "steps": [
+                    {
+                        "args": [
+                            [f"frame_{k}"],
+                            {
+                                "frame": {"duration": 0, "redraw": True},
+                                "mode": "immediate",
+                                "transition": {"duration": 0},
+                            },
+                        ],
+                        "label": str(k),
+                        "method": "animate",
+                    }
+                    for k in range(n_frames)
+                ],
+                "x": 0.1,
+                "len": 0.85,
+                "xanchor": "left",
+                "y": 0.0,
+                "yanchor": "top",
+                "pad": {"b": 10, "t": 50},
+                "currentvalue": {
+                    "visible": True,
+                    "prefix": "Step: ",
+                    "xanchor": "right",
+                    "font": {"size": 14},
+                },
+                "transition": {"duration": 0},
+            }
+        ],
+        scene={
+            "xaxis": {"visible": False},
+            "yaxis": {"visible": False},
+            "zaxis": {"visible": False},
+            "aspectmode": "data",
+        },
+    )
 
     return fig
 

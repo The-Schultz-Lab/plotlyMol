@@ -1,11 +1,17 @@
+<div class="hero-title" markdown>
+
 # plotlyMol
 
-<p align="center">
-  <img src="../logo.svg" alt="plotlyMol Logo" width="300"/>
-</p>
+Interactive 3D Molecular Visualization
 
-![Tests](https://github.com/NCCU-Schultz-Lab/plotlyMol/actions/workflows/test.yml/badge.svg)
-![Lint](https://github.com/NCCU-Schultz-Lab/plotlyMol/actions/workflows/lint.yml/badge.svg)
+</div>
+
+<video autoplay loop muted playsinline style="width:100%;max-width:900px;display:block;margin:1.5rem auto;border-radius:8px">
+  <source src="assets/demo.webm" type="video/webm">
+</video>
+
+![Tests](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/test.yml/badge.svg)
+![Lint](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/lint.yml/badge.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 **Interactive 3D molecular visualizations with Plotly**
@@ -19,7 +25,7 @@ plotlyMol is a Python package for creating beautiful, interactive 3D molecular v
 - **SMILES-to-3D**: Automatic 3D coordinate generation from SMILES via RDKit
 - **Orbital Visualization**: Isosurface rendering from quantum chemistry cube files
 - **Bond Order Display**: Visual differentiation of single, double, triple, and aromatic bonds
-- **Interactive GUI**: Streamlit-based web interface for easy exploration
+- **Interactive GUI**: Dash-based web interface for easy exploration
 - **Export Options**: Save as interactive HTML or static PNG images
 
 ## Quick Example
@@ -94,8 +100,8 @@ Ready to visualize molecules? Check out the [Installation](installation.md) guid
 
 ## Community & Support
 
-- **GitHub Repository**: [NCCU-Schultz-Lab/plotlyMol](https://github.com/NCCU-Schultz-Lab/plotlyMol)
-- **Issue Tracker**: [Report bugs or request features](https://github.com/NCCU-Schultz-Lab/plotlyMol/issues)
+- **GitHub Repository**: [The-Schultz-Lab/plotlyMol](https://github.com/The-Schultz-Lab/plotlyMol)
+- **Issue Tracker**: [Report bugs or request features](https://github.com/The-Schultz-Lab/plotlyMol/issues)
 - **License**: MIT License
 
 ## Citation
@@ -107,6 +113,6 @@ If you use plotlyMol in your research, please cite:
   title = {plotlyMol: Interactive 3D Molecular Visualizations},
   author = {Schultz, Jonathan and Lear, Benjamin},
   year = {2026},
-  url = {https://github.com/NCCU-Schultz-Lab/plotlyMol}
+  url = {https://github.com/The-Schultz-Lab/plotlyMol}
 }
 ```
