@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plotlymol"
-version = "0.2.0"
+version = "0.2.1"
 description = "A package to create interactive molecular visualizations using Plotly"
 readme = "README.md"
 authors = [
-    {name = "Jonathan Schultz", email = "jonathanschultzNU@users.noreply.github.com"},
+    {name = "Jonathan Schultz"},
     {name = "Benjamin Lear"}
 ]
 license = {text = "MIT"}
@@ -154,7 +154,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["ARG", "S101"]
+"tests/*" = ["ARG", "S101", "E402"]
 "src/plotlymol3d/__init__.py" = ["F403"]
 "src/plotlymol3d/test.py" = ["ALL"]
 "src/plotlymol3d/Cube_to_Blender*" = ["ALL"]

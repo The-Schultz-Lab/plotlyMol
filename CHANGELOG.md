@@ -7,10 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-04-18
+
 ### Changed
 - GUI migrated from Streamlit to Dash — launch with `python examples/gui_app.py`
 - `gui` optional dependency updated: `dash>=2.14.0` + `dash-bootstrap-components>=1.5.0` (replaces `streamlit`)
 - `launch_app.bat` and `stop_app.bat` updated for Dash process management
+- Bumped `black` minimum from `>=23.0.0` to `>=24.3.0` in `requirements.txt`
+
+### Fixed
+- Removed stale `streamlit` dependency from `requirements.txt` and `environment.yml`
+- Corrected all remaining Streamlit references in docs to Dash (`about.md`, `installation.md`, `contributing.md`, `tutorials/index.md`)
+- Updated version number from 0.1.0 to 0.2.0 in `docs/about.md` (including BibTeX citation)
+- Fixed Python minimum version in `docs/installation.md` (3.8 → 3.9)
+- Updated author contact email to `The-Schultz-Lab@users.noreply.github.com` in `docs/about.md`
+- Replaced broken `docs/ROADMAP.md` and `docs/PERFORMANCE_TESTING_GUIDE.md` links in `README.md` and `docs/contributing.md`
+- Updated stale Streamlit cache reference in `tests/test_performance.py`
+- Fixed logo not rendering on PyPI by replacing relative `logo.svg` path with absolute raw GitHub URL
 
 ## [0.2.0] - 2026-04-04
 

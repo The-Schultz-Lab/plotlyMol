@@ -87,7 +87,7 @@ Comprehensive tutorials are currently in development! Check back soon for:
     - Embedding visualizations
     - Building web apps
     - API integration
-    - Streamlit deployment
+    - Dash deployment
 
 ## Jupyter Notebooks
 

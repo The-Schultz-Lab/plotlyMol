@@ -4,7 +4,7 @@ Thank you for your interest in contributing to plotlyMol! This guide will help y
 
 ## Ways to Contribute
 
-###  Report Bugs
+### Report Bugs
 
 Found a bug? Please [open an issue](https://github.com/The-Schultz-Lab/plotlyMol/issues/new) with:
 
@@ -14,7 +14,7 @@ Found a bug? Please [open an issue](https://github.com/The-Schultz-Lab/plotlyMol
 - System information (OS, Python version)
 - Minimal code example
 
-###  Suggest Features
+### Suggest Features
 
 Have an idea? We'd love to hear it! [Open an issue](https://github.com/The-Schultz-Lab/plotlyMol/issues/new) describing:
 
@@ -22,7 +22,7 @@ Have an idea? We'd love to hear it! [Open an issue](https://github.com/The-Schul
 - Why it would be valuable
 - Possible implementation approach (optional)
 
-###  Improve Documentation
+### Improve Documentation
 
 Documentation improvements are always welcome:
 
@@ -31,7 +31,7 @@ Documentation improvements are always welcome:
 - Improve API documentation
 - Translate documentation (future)
 
-###  Submit Code
+### Submit Code
 
 Ready to code? Great! Follow the guidelines below.
 
@@ -213,11 +213,13 @@ pre-commit run --all-files
 All pull requests must pass CI checks:
 
 #### Test Workflow
+
 - Runs on Ubuntu, macOS, Windows
 - Tests Python 3.9, 3.10, 3.11, 3.12
 - Runs full test suite with coverage
 
 #### Lint Workflow
+
 - Black formatting check
 - Ruff linting
 - Mypy type checking
@@ -297,6 +299,7 @@ Your PR should:
 To add support for a new file format:
 
 1. Add parser function in `plotlyMol3D.py`:
+
    ```python
    def newformat_to_rdkitmol(filepath: str) -> Chem.Mol:
        """Parse new format file to RDKit Mol."""
@@ -320,10 +323,10 @@ To add new visualization features:
 
 #### 3. GUI Features
 
-To enhance the Streamlit GUI:
+To enhance the Dash GUI:
 
 1. Modify `src/plotlymol3d/app.py`
-2. Test manually with `streamlit run`
+2. Test manually with `python examples/gui_app.py`
 3. Update user guide
 
 ## Documentation
@@ -397,7 +400,7 @@ We use [Semantic Versioning](https://semver.org/):
 
 ## Development Roadmap
 
-See [ROADMAP.md](roadmap.md) for planned features and improvements.
+See [GitHub Issues](https://github.com/The-Schultz-Lab/plotlyMol/issues) for planned features and improvements.
 
 ## Recognition
 

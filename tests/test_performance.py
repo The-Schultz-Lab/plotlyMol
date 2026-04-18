@@ -515,10 +515,10 @@ def analyze_performance_results(results: dict[str, pd.DataFrame]):
 
     # General recommendations
     print("\n6. GENERAL RECOMMENDATIONS:")
-    print("   For GUI/Streamlit Performance:")
+    print("   For GUI/Dash Performance:")
     print("   • Use resolution=16 for interactive preview (2-3x faster)")
     print("   • Switch to resolution=32 for final figures")
-    print("   • Cache parsed vibration files with @st.cache_resource")
+    print("   • Cache parsed vibration files using session state")
     print("   • Use 'stick' mode for molecules >50 atoms")
     print("   • Limit animations to 20-30 frames during development")
     print("   • Consider 'vdw' mode for very large systems (>100 atoms)")

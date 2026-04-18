@@ -1,7 +1,7 @@
 # plotlyMol
 
 <p align="center">
-  <img src="logo.svg" alt="plotlyMol Logo" width="300"/>
+  <img src="https://raw.githubusercontent.com/The-Schultz-Lab/plotlyMol/main/logo.svg" alt="plotlyMol Logo" width="300"/>
 </p>
 
 [![Tests](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/test.yml/badge.svg)](https://github.com/The-Schultz-Lab/plotlyMol/actions/workflows/test.yml)
@@ -20,11 +20,15 @@ Interactive molecular visualizations with Plotly. Supports SMILES, XYZ, MOL/PDB,
   - Static displacement arrows
   - Animated vibrations with interactive controls
   - Heatmap coloring by displacement magnitude
-- Streamlit GUI for interactive exploration
+- Dash GUI for interactive exploration
 
 ## Installation
 
-### From source (recommended for now)
+```bash
+pip install plotlymol
+```
+
+### From source (for development)
 
 ```bash
 git clone https://github.com/The-Schultz-Lab/plotlyMol.git
@@ -68,13 +72,13 @@ fig.show()
 from plotlymol3d import draw_3D_rep
 
 fig = draw_3D_rep(
-	cubefile="path/to/file.cube",
-	molfile="path/to/file.mol",
-	mode="ball+stick",
-	ambient=0.1,
-	cubedraw="orbitals",
-	orbital_opacity=0.25,
-	orbital_colors=["darkorange", "darkblue"],
+    cubefile="path/to/file.cube",
+    molfile="path/to/file.mol",
+    mode="ball+stick",
+    ambient=0.1,
+    cubedraw="orbitals",
+    orbital_opacity=0.25,
+    orbital_colors=["darkorange", "darkblue"],
 )
 fig.show()
 ```
@@ -167,10 +171,10 @@ for mode in vib_data.modes:
 
 ## GUI
 
-Launch the Streamlit app for interactive controls:
+Launch the Dash app for interactive controls:
 
 ```bash
-streamlit run examples/gui_app.py
+python examples/gui_app.py
 ```
 
 ## Examples
@@ -213,7 +217,7 @@ python tests/test_performance.py
 jupyter notebook examples/performance_benchmarking.ipynb
 ```
 
-**Full guide:** [Performance Testing Guide](docs/PERFORMANCE_TESTING_GUIDE.md)
+**Full guide:** `docs/PERFORMANCE_TESTING_GUIDE.md` (coming soon)
 
 **Key metrics tracked:**
 
@@ -227,7 +231,7 @@ Use these tools to identify bottlenecks and optimize GUI responsiveness.
 
 ## Repository layout
 
-```
+```text
 plotlyMol/
 ├─ src/
 │  └─ plotlymol3d/        # Library package code + sample data files
@@ -241,4 +245,4 @@ plotlyMol/
 
 ## Roadmap
 
-See the current roadmap in [docs/ROADMAP.md](docs/ROADMAP.md).
+See [GitHub Issues](https://github.com/The-Schultz-Lab/plotlyMol/issues) for planned features and upcoming work.

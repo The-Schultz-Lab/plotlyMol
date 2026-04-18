@@ -9,7 +9,7 @@ plotlyMol is an open-source Python package for creating interactive 3D molecular
 **Jonathan Schultz**
 North Carolina Central University, Assistant Professor of Chemistry
 
-**Benjamin Lear**
+**[Benjamin Lear](https://github.com/ProfLear)**
 (The Pennsylvania State University, Professor of Chemistry)
 
 ## Motivation
@@ -51,7 +51,7 @@ plotlyMol is built on industry-standard scientific Python libraries:
 
 ### Optional Components
 
-- **[Streamlit](https://streamlit.io/)** - Web app framework for GUI
+- **[Dash](https://dash.plotly.com/)** - Web app framework for GUI
 - **[Kaleido](https://github.com/plotly/Kaleido)** - Static image export
 - **pytest** - Testing framework
 - **black/ruff** - Code quality tools
@@ -61,6 +61,7 @@ plotlyMol is built on industry-standard scientific Python libraries:
 ### Simplicity
 
 Simple things should be simple:
+
 ```python
 from plotlymol3d import draw_3D_rep
 fig = draw_3D_rep(smiles="CCO")
@@ -70,6 +71,7 @@ fig.show()
 ### Flexibility
 
 Complex things should be possible:
+
 ```python
 fig = draw_3D_rep(
     cubefile="orbital.cube",
@@ -139,7 +141,7 @@ Initial development by Prof. Lear focused on creating a modern molecular visuali
 
 ## Project Status
 
-**Current Version**: 0.1.0 (Development)
+**Current Version**: 0.2.0 (Development)
 
 **Status**: Pre-release
 
@@ -194,7 +196,7 @@ Thanks to the developers of:
 
 plotlyMol is released under the [MIT License](https://github.com/The-Schultz-Lab/plotlyMol/blob/main/LICENSE).
 
-```
+```text
 MIT License
 
 Copyright (c) 2026 Jonathan Schultz & Benjamin Lear
@@ -214,7 +216,6 @@ copies or substantial portions of the Software.
 
 - **GitHub Issues**: [Report issues or request features](https://github.com/The-Schultz-Lab/plotlyMol/issues)
 - **GitHub Discussions**: [Ask questions or share ideas](https://github.com/The-Schultz-Lab/plotlyMol/discussions)
-- **Email**: jonathanschultzNU@users.noreply.github.com
 
 ## Citation
 
@@ -226,7 +227,7 @@ If you use plotlyMol in your research, please cite:
   author = {Schultz, Jonathan and Lear, Benjamin},
   year = {2026},
   url = {https://github.com/The-Schultz-Lab/plotlyMol},
-  note = {Version 0.1.0}
+  note = {Version 0.2.0}
 }
 ```
 

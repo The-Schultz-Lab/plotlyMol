@@ -2,7 +2,7 @@
 
 ## Requirements
 
-plotlyMol requires **Python 3.8 or higher**.
+plotlyMol requires **Python 3.9 or higher**.
 
 ## Install from Source
 
@@ -50,7 +50,7 @@ This includes:
 - **black** - Code formatting
 - **ruff** - Fast linting
 - **mypy** - Type checking
-- **streamlit** - GUI application
+- **dash** + **dash-bootstrap-components** - GUI application
 
 ## Verify Installation
 
